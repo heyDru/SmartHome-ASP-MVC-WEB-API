@@ -1,0 +1,3 @@
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\Model\bin\Debug\netstandard1.4\Model.deps.json
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\Model\obj\Debug\netstandard1.4\Model.csprojResolveAssemblyReference.cache
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\Model\obj\Debug\netstandard1.4\Model.AssemblyInfo.cs
