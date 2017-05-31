@@ -1,0 +1,16 @@
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\ConsoleApp1.exe.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\ConsoleApp1.exe
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\ConsoleApp1.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\DataService.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\EntityFramework.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\Models.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\DataService.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\DataService.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\Models.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\Models.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\EntityFramework.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\bin\Debug\EntityFramework.SqlServer.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\obj\Debug\ConsoleApp1.csprojResolveAssemblyReference.cache
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\obj\Debug\ConsoleApp1.exe
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\ConsoleApp1\obj\Debug\ConsoleApp1.pdb

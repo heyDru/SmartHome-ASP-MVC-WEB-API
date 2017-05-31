@@ -78,14 +78,5 @@ namespace Model.Model.Implementation
         }
 
 
-        //public void SetCurrentChanel(int id)
-        //{
-        //    Channel channel = ChannelList.Where(ch => ch.ChannelId == id).FirstOrDefault();
-        //    if (channel != null)
-        //    {
-        //        CurrentChannel = channel;
-        //    }
-        //}
-
     }
 } 

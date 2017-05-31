@@ -3,22 +3,140 @@
     padding-bottom: 20px;
 }
 
-/* Set padding to keep content from hitting the edges */
 .body-content {
     padding-left: 15px;
     padding-right: 15px;
+
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
 .dl-horizontal dt {
     white-space: normal;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
 input,
 select,
 textarea {
     max-width: 280px;
+}
+
+
+.device-category {
+    padding-bottom: 8px;
+    padding-top: 8px;
+    font-size:30px;
+}
+
+
+
+.device-info-block {
+    padding: 8px;
+    margin-bottom: 2px;
+}
+
+.inner-item-div {
+    
+    background-color: lightblue;
+    text-align: center;
+    border-radius: 4px;
+    font-size: 16px;
+    border-radius: 8px;
+    margin-bottom:35px;
+}
+
+.device-on {
+    background-color: lightblue;
+}
+
+.device-off {
+    background-color: slategray;
+}
+
+.name-div {
+    background-color: rgba(248,154,108,0.9);
+    padding: 8px;
+    font-size: 19px;
+    border-radius: 8px 8px 0 0;
+}
+
+.line {
+    border-bottom: 1px solid yellow;
+    margin: 1px 20px;
+
+}
+
+.error{
+    color:orangered;
+}
+
+#loaderDiv {
+    text-align: center;
+}
+
+.addBtn{
+    margin-top:25px;
+    width:1100px;
+}
+
+.btnSwitch{
+    height:55px;
+}
+
+.btnSwitchIcon{
+    padding-top:5px;
+    font-size:35px;
+
+}
+
+.btnDone {
+    height: 55px;
+    width:195px;
+}
+.btnCancel {
+    height: 55px;
+    width: 195px;
+    margin: 25px;
+color:black;
+    padding-top:15px;
+    background-color:silver;
+}
+
+.btnDoneIcon {
+    padding-top:9px;
+    font-size: 20px;
+}
+
+.myInputConfig {
+    text-align:center;
+    font-size:20px;
+}
+
+.myLabel {
+    text-align: center;
+    font-size: 16px;
+
+}
+
+.deleteName {
+    font-size: 25px;
+    color: darkorange;
+}
+
+.confBtn {
+    margin: 10px;
+    width: 90px;
+    background-color: #88a1ae;
+    border: 0px;
+}
+.btn-danger {
+    margin: 10px;
+    width:70px;
+}
+
+.menus{
+    margin:auto;
+}
+
+.channelDisplay {
+    font-size: 20px;
+
 }

@@ -65,3 +65,15 @@ F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\Microsoft.A
 F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\obj\Debug\SmartHomeMVC.csprojResolveAssemblyReference.cache
 F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\obj\Debug\SmartHomeMVC.dll
 F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\obj\Debug\SmartHomeMVC.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\DataService.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\Models.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\EntityFramework.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\DataService.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\DataService.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\Models.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\Models.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\EntityFramework.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\AutoMapper.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\AutoMapper.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\EntityFramework.SqlServer.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\SmartHomeMVC\bin\EntityFramework.SqlServer.xml

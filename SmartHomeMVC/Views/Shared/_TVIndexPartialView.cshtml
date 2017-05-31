@@ -1,0 +1,81 @@
+﻿@model SmartHomeMVC.Models.ViewModels.IndexViewModels.TVIndexViewModel
+
+@Html.AntiForgeryToken()
+
+
+@if (Model.TurnOn)
+{
+    <div class="inner-item-div device-on">
+        <div class="name-div">
+        <h4>@Model.Name</h4>
+            <div class="line"></div>
+            <a href="#" class="btn btn-danger" onclick="ConfirmDeleteTV(@Model.Id,'@Model.Name')">Delete</a>
+        </div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-off"></span> <span>Device is - ON</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-volume-up"></span> <span>Volume - </span><span>@Model.Volume</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-picture"></span> <span>Channel - </span><span>@Model.CurrentChannel.ChannelName</span>
+        </div>
+        <div class="line"></div>
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-flash"></span> <span>Consumption - </span><span>@Model.Consumption wT</span>
+        </div>
+
+        <div class="line"></div>
+
+        <a class="btn btn-default confBtn" href="#" onclick="ConfigTV(@Model.Id)">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+    </div>
+}
+else
+{
+    <div class="inner-item-div device-off">
+        <div class="name-div">
+            <h4>@Model.Name</h4>
+
+            <div class="line"></div>
+            <a href="#" class="btn btn-danger" onclick="ConfirmDeleteTV(@Model.Id,'@Model.Name')">Delete</a>
+        </div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-off"></span> <span>Device is - OFF</span>
+        </div>
+        <div class="line"></div>
+
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-volume-up"></span> <span>Volume - </span><span>@Model.Volume</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-picture"></span> <span>Channel - </span><span>@Model.CurrentChannel.ChannelName</span>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="device-info-block">
+            <span class="glyphicon glyphicon-flash"></span> <span>Consumption - </span><span>@Model.Consumption wT</span>
+        </div>
+
+        <div class="line"></div>
+
+        <a class="btn btn-default confBtn" href="#" onclick="ConfigTV(@Model.Id)">
+            <span class="glyphicon glyphicon-cog"></span>
+        </a>
+    </div>
+}
+

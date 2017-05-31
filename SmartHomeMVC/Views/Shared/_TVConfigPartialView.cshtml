@@ -1,0 +1,109 @@
+﻿@model SmartHomeMVC.Models.ViewModels.IndexViewModels.TVIndexViewModel
+
+@Html.AntiForgeryToken()
+
+@using (Ajax.BeginForm("ConfigTV", "Home",
+                                        new AjaxOptions
+                                        {
+                                            HttpMethod = "Post",
+                                            LoadingElementId = "loaderDiv",
+                                            UpdateTargetId = ("tv_" + @Model.Id),
+                                            OnSuccess = "OnSuccessConfTV",
+                                            InsertionMode = InsertionMode.Replace
+                                        },
+                                        htmlAttributes: new { @id = "tvConfigForm", @class = "form-horizontal text-muted" }))
+{
+        @Html.HiddenFor(m => m.Id)
+
+    <div class="form-group">
+
+        @if (Model.TurnOn)
+        {
+            <div class="text-center">
+                <a class="btn btn-success btn-block btnSwitch" id="btnSwitchTV" onclick="TVSwitchClick()"><span class="glyphicon glyphicon-off btnSwitchIcon"></span></a>
+                <span id="switchTextTV">Device is ON</span>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <a class="btn btn-warning btn-block btnSwitch" id="btnSwitchTV" onclick="TVSwitchClick()"><span class="glyphicon glyphicon-off btnSwitchIcon"></span></a>
+                <span id="switchTextTV">Device is OFF</span>
+            </div>
+        }
+
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = " col-sm-3 control-label myLabel " })
+        <div class="col-sm-9">
+
+            @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "form-control myInputConfig", @placeholder = "Name" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+        </div>
+    </div>
+
+    <div class="form-group text-center ">
+        @Html.LabelFor(m => m.Volume, "Volume",
+             htmlAttributes: new { @class = " col-sm-3 control-label myLabel" })
+
+        <div class="col-sm-9">
+
+            @Html.TextBoxFor(m => m.Volume,
+         htmlAttributes: new
+         {
+             @class = "form-control myInputConfig",
+             @type = "number",
+             @max = "100",
+             @min = "0",
+             @step = "1",
+             @placeholder = "Volume",
+         })
+            @Html.ValidationMessageFor(model => model.Volume, "", new { @class = "error" })
+        </div>
+    </div>
+
+
+    <div class="form-group text-center ">
+        @Html.LabelFor(m => m.CurrentChannel, "Channel",
+             htmlAttributes: new { @class = " col-sm-3 control-label myLabel" })
+
+        <div class="col-sm-9">
+            @Html.DropDownListFor(m=>m.CurrentChannel.ChannelId, Model.ChannelsDropDownList, new {@class = "form-control" })
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consumption, "Electricity Consumption",
+             htmlAttributes: new { @class = " col-sm-3 control-label myLabel" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(m => m.Consumption,
+         htmlAttributes: new
+         {
+             @class = "form-control myInputConfig",
+             @step = "0.1",
+             @placeholder = "Electricity Consumption",
+         })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+        </div>
+    </div>
+
+
+    @Html.HiddenFor(m => m.TurnOn, new { @class = "form-control", @id = "tvTurnOn" })
+
+
+    <div class="text-center">
+        <button type="submit" class="btn btn-success btnDone" id="btnDoneHeater"><span class="glyphicon glyphicon-ok btnDoneIcon"></span></button>
+    </div>
+}
+
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+
+<script>
+    function OnSuccessConfTV() {
+        $("#loaderDiv").hide();
+        $("#tvModalConfig").modal("hide");
+    }
+</script>

@@ -7,6 +7,7 @@ namespace Model.Model.Implementation
     public class Device
     {
         public int Id { get; set; }
+        public string Name { get; set; }
         public double Consumption { get; set; }
         public bool TurnOn { get; set; }
         public string Type { get; set; }

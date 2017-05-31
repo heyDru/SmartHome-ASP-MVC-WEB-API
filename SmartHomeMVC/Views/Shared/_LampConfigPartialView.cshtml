@@ -1,0 +1,118 @@
+﻿@model SmartHomeMVC.Models.ViewModels.IndexViewModels.LampIndexViewModel
+
+@Html.AntiForgeryToken()
+
+@using (Ajax.BeginForm("ConfigLamp", "Home",null,
+    new AjaxOptions
+    {
+        HttpMethod = "Post",
+        UpdateTargetId = ("lamp_" + @Model.Id),
+        LoadingElementId = "loaderDiv",
+        OnSuccess = "OnSuccessConf",
+        InsertionMode =InsertionMode.Replace
+    },
+    htmlAttributes: new { @id = "lampConfigForm", @class = "form-horizontal text-muted" }))
+{
+    @Html.HiddenFor(m => m.Id)
+    <div class="form-group">
+        
+        @if (Model.TurnOn)
+        {
+            <div class="text-center">
+                <a class="btn btn-success btn-block btnSwitch" id="btnSwitch" onclick="SwitchClick()"><span class="glyphicon glyphicon-off btnSwitchIcon"></span></a>
+                <span id="switchText">Device is ON</span>
+            </div>
+        }
+        else
+        {
+            <div class="text-center">
+                <a class="btn btn-warning btn-block btnSwitch" id="btnSwitch" onclick="SwitchClick()"><span class="glyphicon glyphicon-off btnSwitchIcon"></span></a>
+                <span id="switchText">Device is OFF</span>
+            </div>
+        }
+
+    </div>
+
+    <div class="form-group ">
+        @Html.LabelFor(m => m.Name, htmlAttributes: new { @class = " col-sm-3 control-label myLabel " })
+        <div class="col-sm-9">
+
+            @Html.TextBoxFor(m => m.Name, htmlAttributes: new { @class = "form-control myInputConfig", @placeholder = "Name" })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+        </div>
+    </div>
+
+    <div class="form-group text-center ">
+        @Html.LabelFor(m => m.Intensity, "Light Intensity",
+             htmlAttributes: new { @class = " col-sm-3 control-label myLabel" })
+        <div class="col-sm-9">
+            @if (Model.TurnOn)
+            {
+                @Html.TextBoxFor(m => m.Intensity,
+         htmlAttributes: new
+         {
+             @class = "form-control myInputConfig",
+             @type = "number",
+             @max = "100",
+             @min = "0",
+             @step = "1",
+             @placeholder = "Light Intensity",
+         })
+                @Html.ValidationMessageFor(model => model.Intensity, "", new { @class = "error" })
+            }
+            else
+            {
+                @Html.TextBoxFor(m => m.Intensity,
+         htmlAttributes: new
+         {
+             @class = "form-control myInputConfig",
+             @type = "number",
+             @max = "100",
+             @min = "0",
+             @step = "1",
+             @placeholder = "Light Intensity",
+             @disabled = "disabled"
+         })
+                @Html.ValidationMessageFor(model => model.Intensity, "", new { @class = "error" })
+            }
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(m => m.Consumption, "Electricity Consumption",
+             htmlAttributes: new { @class = " col-sm-3 control-label myLabel" })
+        <div class="col-sm-9">
+            @Html.TextBoxFor(m => m.Consumption,
+         htmlAttributes: new
+         {
+             @class = "form-control myInputConfig",
+             @step = "0.1",
+             @placeholder = "Electricity Consumption",
+         })
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "error" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(m => m.TurnOn, new { @class = "form-control" })
+    <div class="text-center">
+      <button type="submit" class="btn btn-success btnDone" id="btnDone" ><span class="glyphicon glyphicon-ok btnDoneIcon"></span></button>
+    </div>
+}
+
+<div id="loaderDiv" style="display:none">
+    <img src="~/Content/ajax-loader.gif" class="loader-div" />
+</div>
+
+
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+
+<script>
+
+        function OnSuccessConf() {
+            $("#loaderDiv").hide();
+            debugger;
+            $("#lampModalConfig").modal("hide");
+        }
+</script>

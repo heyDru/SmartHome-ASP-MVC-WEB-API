@@ -1,0 +1,39 @@
+﻿@model IEnumerable<Models.Model.Implementation.Channel>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    <div class="text-center">
+        <a href="@Url.Action("Create", "Channels")" class="btn btn-group btn-info addBtn">
+            @*<span class="glyphicon glyphicon-plus-sign"></span>*@
+            Add Channel
+        </a>
+    </div>
+</p>
+<table class="table">
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                <div class="col-lg-offset-9 channelDisplay">
+                    <span class=""> @Html.DisplayFor(modelItem => item.ChannelName)</span>
+                </div>
+            </td>
+            <td>
+                <div class="col-lg-offset-3">
+                    <a href="@Url.Action("Edit", "Channels",new { id=item.ChannelId })" class="btn btn-warning">
+                        <span class="glyphicon glyphicon-pencil"></span>
+                    </a>
+                    <a href="@Url.Action("Delete", "Channels",new { id=item.ChannelId })" class="btn btn-danger">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,15 +1,327 @@
-﻿@{
-    ViewBag.Title = "Home Page";
+﻿@model SmartHomeMVC.Models.ViewModels.IndexViewModels.IndexViewModel
+
+@{
+    ViewBag.Title = "Index";
+    //Layout = null;
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+
+<div class="container">
+
+    @*View For Add Device*@
+    <div class="text-center">
+        <a class="btn btn-group btn-info addBtn" href="#" data-toggle="modal" data-target="#addDeviceModal">
+            Add Device
+        </a>
+    </div>
+
+    @*View For Lamps*@
+    @if (Model.Lamps != null)
+    {
+        <div class="text-center device-category">
+            <span>LIGHT <span class="glyphicon glyphicon-lamp"></span></span>
+        </div>
+        <div class="row jumbotron">
+
+            @foreach (var item in Model.Lamps)
+                {
+            <div class="col-md-3 text-center device-block" id="lamp_@item.Id">
+                @Html.Partial("_LampIndexPartialView", item)
+            </div>
+            }
+
+        </div>
+    }
+    <hr />
+
+    @*View For Heaters*@
+    @if (Model.Heaters != null)
+    {
+        <div class="text-center device-category">
+            <span>TEMPERATURE <span class="glyphicon glyphicon-fire"></span></span>
+        </div>
+        <div class="row jumbotron">
+            @foreach (var item in Model.Heaters)
+            {
+                <div class="col-md-3 text-center device-block" id="heater_@item.Id">
+
+                    @Html.Partial("_HeaterIndexPartialView", item)
+                </div>
+            }
+        </div>
+    }
+    <hr />
+
+    @*View For TV*@
+    @if (Model.TVs != null)
+    {
+        <div class="text-center device-category">
+            <span>TV <span class="glyphicon glyphicon-eye-open"></span></span>
+        </div>
+        <div class="row jumbotron">
+            @foreach (var item in Model.TVs)
+            {
+                <div class="col-md-3 text-center device-block" id="tv_@item.Id">
+                    @Html.Partial("_TVIndexPartialView", item)
+                    </div>
+                    }
+            <div class="col-md-12 text-center">
+                @Html.ActionLink("Channel Manager","Index", "Channels")
+            </div>
+                </div>
+            }
+
+    <input type="hidden" id="hiddenId" />
+    <input type="hidden" id="hiddenName" />
+
+
+
+
+    @*Lamp Modal pop-ups*@
+    <div class="modal fade" id="lampModalConfig">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Lamp Configuration</h3>
+                </div>
+                <hr />
+                <div class="modal-body" id="lampConfigForm">
+
+                </div>
+                <div class="text-center">
+                    <a href="#" class="btn btn-default btnCancel" data-dismiss="modal"><span>Cancel</span></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="lampModalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title text-center">Delete Device</h3>
+                </div>
+                <hr />
+                <div class="mdoal-body">
+                    <div class="text-center">
+                        <h4>Are you sure? You want to delete this device?</h4>
+                    </div>
+                    <div class="text-center deleteName"><span id="ToDeleteLampName"></span></div>
+                    <div id="loaderDiv" style="display:none">
+                        <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row text-center">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-danger" onclick="DeleteLamp()" id="deleteLamp">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Heater Modal pop-ups  *@
+    <div class="modal fade" id="heaterModalConfig">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Heater Configuration</h3>
+                </div>
+                <hr />
+                <div class="modal-body" id="heaterConfigForm">
+
+                </div>
+                <div class="text-center">
+                    <a href="#" class="btn btn-default btnCancel" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="heaterModalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title text-center">Delete Device</h3>
+                </div>
+                <hr />
+                <div class="mdoal-body">
+                    <div class="text-center">
+                        <h4>Are you sure? You want to delete this device? </h4>
+                    </div>
+                    <div class="text-center deleteName"><span id="ToDeleteHeaterName"></span></div>
+                    <div id="loaderDiv" style="display:none">
+                        <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row text-center">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-danger" onclick="DeleteHeater()" id="deleteHeater">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*Tv Modal pop-ups*@
+    <div class="modal fade" id="tvModalDelete">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title text-center">Delete Device</h3>
+                </div>
+                <hr />
+                <div class="mdoal-body">
+                    <div class="text-center">
+                        <h4>Are you sure? You want to delete this device? </h4>
+                    </div>
+                    <div class="text-center deleteName" ><span id="ToDeleteTVName"></span></div>
+                    <div id="loaderDiv" style="display:none">
+                        <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                    </div>
+                </div>
+                <hr />
+                <div class="row text-center">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                    <a href="#" class="btn btn-danger" onclick="DeleteTV()" id="deleteTV">Delete</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="tvModalConfig">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">TV Configuration</h3>
+                </div>
+                <hr />
+                <div class="modal-body" id="tvConfigForm">
+
+                </div>
+                <div class="text-center">
+                    <a href="#" class="btn bg-danger btnCancel" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @*ADD Modal*@
+    <div class="modal fade" id="addDeviceModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <a href="#" class="close" data-dismiss="modal">&times;</a>
+                    <h3 class="modal-title">Add new device</h3>
+                </div>
+                <hr />
+
+                <div class="modal-body">
+                    @using (Html.BeginForm("Index", "Home", FormMethod.Post))
+                    {
+                    @Html.DropDownListFor(model => model.Device.TypeId,
+            new SelectList(Model.DeviceTypes, "Id", "Name"),
+            "Device Type",
+            new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Device.TypeId, "", new { @class = "error" })
+
+
+                    @Html.TextBoxFor(model => model.Device.Name,
+                new { @class = "form-control", @placeholder = "Device Name" })
+                    @Html.ValidationMessageFor(model => model.Device.Name, "", new { @class = "error" })
+
+
+                    @Html.TextBoxFor(model => model.Device.Consumption,
+            new { @class = "form-control", @placeholder = "Electricity consumption " })
+                    @Html.ValidationMessageFor(model => model.Device.Consumption, "", new { @class = "error" })
+
+                    <input type="submit" value="Create" class="btn btn-block btn-primary inputModal" id="btnSubmit" />
+                    }
+                    <div id="loaderDiv" style="display:none">
+                        <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                    </div>
+                </div>
+                <hr />
+
+                <div class="modal-footer">
+                    <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+ 
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-       
-    </div>
-</div>
+<span id="lol"></span>
+
+<script src="~/Scripts/jquery-3.1.1.js"></script>
+
+@*<script src="~/Scripts/jquery-1.10.2.min.js" type="text/javascript"></script>*@
+<script type="text/javascript">
+    //$(document).ready(function () {
+    //    $("#btnSubmit").click(function () {
+    //        var data = $("#addForm").serialize();
+    //        $("#loaderDiv").show();
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "/Home/Index",
+    //            data: data,
+    //            success: function (response) {
+    //                alert("Ok!!!");
+    //                $("#loaderDiv").hide();
+    //                response.m
+    //            }
+    //        })
+    //    })
+    //})
+
+    //var ConfirmDeleteLamp = function (Lampid) {
+    //    $("#hiddenId").val(Lampid);
+    //    $("#lampModalDelete").modal('show');
+    //}
+
+    //var DeleteLamp = function () {
+
+    //    var lampId = $("#hiddenId").val();
+    //    $("#loaderDiv").show();
+
+    //    $.ajax({
+    //        type: "POST",
+    //        url: "/Home/DeleteLamp",
+    //        data: {
+    //            lampId: lampId
+    //        },
+    //        success: function (response) {
+    //            $("#loaderDiv").hide();
+    //            $("#lampModalDelete").modal('hide');
+    //            $("#lamp_" + lampId).remove();
+    //        }
+    //    })
+
+    //}
+
+
+    //var ConfigLamp = function (lampId) {
+    //    var url = "/Home/ConfigLamp?lampId=" + lampId;
+    //    $("#hiddenId").val(lampId);
+    //    $("#lampConfigForm").load(url, function () {
+    //        $("#lampModalConfig").modal("show");
+    //    })
+
+    //}
+</script>
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+<script src="~/Scripts/jquery.validate.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js" type="text/javascript"></script>
+<script src="~/Scripts/jquery-ui-1.12.1.js"></script>
+
+
+<script src="~/Scripts/app/lamp-funcs.js"></script>
+<script src="~/Scripts/app/heater-func.js"></script>
+<script src="~/Scripts/app/tv-funcs.js"></script>

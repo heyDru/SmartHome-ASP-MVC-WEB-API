@@ -1,0 +1,13 @@
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\DataService.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\DataService.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\DataService.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\EntityFramework.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\EntityFramework.SqlServer.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\Models.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\Models.pdb
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\Models.dll.config
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\EntityFramework.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\bin\Debug\EntityFramework.SqlServer.xml
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\obj\Debug\DataService.csprojResolveAssemblyReference.cache
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\obj\Debug\DataService.dll
+F:\dotNet\Oracle\Projects\SmartHomeMVC\SmartHomeMVC\DataService\obj\Debug\DataService.pdb
