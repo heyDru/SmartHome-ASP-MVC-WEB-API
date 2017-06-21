@@ -192,7 +192,6 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\Api\LampApiController.cs" />
-    <Compile Include="Controllers\Api\LampApiControllerDemo.cs" />
     <Compile Include="Controllers\Api\TVsApiController.cs" />
     <Compile Include="Controllers\ChannelsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />

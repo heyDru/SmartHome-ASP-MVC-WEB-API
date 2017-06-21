@@ -84,15 +84,7 @@ namespace SmartHomeMVC.Controllers
                         break;
                 }
             }
-            //lamps = dataService.Lamps.GetList();
-            //heaters = dataService.Heaters.GetList();
-            //tvs = dataService.TVs.GetList();
-            //deviceTypes = dataService.DeviceTypes.GetList();
 
-            //indexViewModel = mapperModelToIndexView.GetIndexViewModel(lamps, heaters, tvs, deviceTypes);
-
-            //indexViewModel.Device = device;
-            //ModelState.Clear();
             return RedirectToAction("Index");
         }
 

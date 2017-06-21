@@ -21,7 +21,6 @@ namespace SmartHomeMVC.Controllers.Api
         IUnitOfWork dataService = new UnitOfWork();
         ModelsToIndexView modelsToIndexView = new ModelsToIndexView();
 
-
         // GET: api/LampApi
         public IEnumerable<Lamp> GetLamps()
         {
@@ -113,8 +112,6 @@ namespace SmartHomeMVC.Controllers.Api
         {
             return dataService.Lamps.GetList().Count(e => e.Id == id) > 0;
         }
-
-       
 
     }
 

@@ -22,7 +22,6 @@ namespace SmartHomeMVC.Controllers.Api
 {
     public class TVsApiController : ApiController
     {
-        private DevicesContext db = new DevicesContext();
         IEnumerable<TV> tvs;
         IUnitOfWork dataService = new UnitOfWork();
         ModelsToIndexView modelsToIndexView = new ModelsToIndexView();
@@ -133,7 +132,7 @@ namespace SmartHomeMVC.Controllers.Api
         {
             if (disposing)
             {
-                db.Dispose();
+                dataService.Dispose();
             }
             base.Dispose(disposing);
         }
