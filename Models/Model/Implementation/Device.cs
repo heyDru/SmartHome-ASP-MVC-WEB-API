@@ -18,6 +18,7 @@ namespace Models.Model.Implementation
         [StringLength(50)]
         public string Name { get; set; }
 
+        [Required(ErrorMessage = "Enter Devie Electricity Consumption")]
         public double Consumption { get; set; }
         public bool TurnOn { get; set; }
 

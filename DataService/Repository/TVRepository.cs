@@ -35,6 +35,7 @@ namespace DataService.Repository
 
             TV tv = db.TVs
               .Include(t => t.CurrentChannel)
+              .Include(t=>t.Type)
               .SingleOrDefault(t => t.Id == id);
 
             return tv;

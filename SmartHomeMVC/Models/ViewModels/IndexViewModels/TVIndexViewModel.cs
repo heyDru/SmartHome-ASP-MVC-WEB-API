@@ -38,5 +38,6 @@ namespace SmartHomeMVC.Models.ViewModels.IndexViewModels
 
         public SelectList ChannelsDropDownList { get; set; }
 
+        public DeviceType Type { get; set; }
     }
 }

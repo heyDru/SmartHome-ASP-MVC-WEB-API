@@ -1,4 +1,5 @@
 ﻿var ConfirmDeleteHeater = function (Heaterid, name) {
+    debugger;
     $("#hiddenId").val(Heaterid);
     $("#ToDeleteHeaterName").html(name);
     debugger;

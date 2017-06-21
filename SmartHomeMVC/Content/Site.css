@@ -1,4 +1,12 @@
-﻿body {
+﻿@media (min-width: 768px) {
+    .navbar-nav.navbar-center {
+        position: absolute;
+        left: 50%;
+        transform: translatex(-50%);
+    }
+}
+
+body {
     padding-top: 50px;
     padding-bottom: 20px;
 }
@@ -138,5 +146,9 @@ color:black;
 
 .channelDisplay {
     font-size: 20px;
-
 }
+
+#addLampForm {
+    margin-bottom: 30px;
+}
+

@@ -1,0 +1,546 @@
+﻿
+@{
+    ViewBag.Title = "GoWebApi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<input type="hidden" id="hiddenId" />
+<input type="hidden" id="hiddenName" />
+
+<div class="container">
+    <div class="row text-center">
+        <h2>Web Api Mode</h2>
+    </div>
+    <div class="row jumbotron text-center">
+        <div class="col-md-4"><button class="btn" id="getLampsApiBtn">Light</button></div>
+        <div class="col-md-4"><button class="btn" id="getHeatersApiBtn">Temperature</button></div>
+        <div class="col-md-4"><button class="btn" id="getTvsApiBtn">TV</button></div>
+    </div>
+
+    <div class="col-lg-12 text-center " id="addLampForm" style="display:none">
+        @*<label>Lamp Name: </label><input type="text" id="addNameLamp"/>
+        <label>Lamp Consumption: </label><input type="number" id="addConsumptionLamp" />*@
+        <form class="form-inline">
+            <div class="form-group">
+                <label class="sr-only" for="addNameLamp">Lamp Name:</label>
+                <input type="text" class="form-control" id="addNameLamp" placeholder="Lamp Name">
+            </div>
+            <div class="form-group">
+                <label class="sr-only" for="addConsumptionLamp">Lamp Electricity Consumption:</label>
+                <input type="number" class="form-control" id="addConsumptionLamp" placeholder="Lamp Electricity Consumption">
+            </div>
+            <button  class="btn btn-default" id="addLampApi">Add Lamp</button>
+        </form>
+        </div>
+        <div class="col-lg-12 text-center " id="addTvForm" style="display:none">
+
+            <form class="form-inline">
+                <div class="form-group">
+                    <label class="sr-only" for="addNameTv">Tv Name:</label>
+                    <input type="text" class="form-control" id="addNameTv" placeholder="Tv Name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="addConsumptionTv">Tv Electricity Consumption:</label>
+                    <input type="number" class="form-control" id="addConsumptionTv" placeholder="Tv Electricity Consumption">
+                </div>
+                <button class="btn btn-default" id="addTvApi">Add Tv</button>
+            </form>
+
+        </div>
+
+    <div class="row jumbotron" id="devicesBlock">
+
+    </div>
+    
+</div>
+
+
+
+<div class="modal fade" id="modalConfig">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Configuration</h3>
+            </div>
+            <hr />
+
+            <div class="modal-body" id="ConfigForm">
+
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="btn btn-default btnCancel" data-dismiss="modal"><span>Cancel</span></a>
+            </div>
+            <div id='errors' style='color:red;'></div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="lampModalDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title text-center">Delete Device</h3>
+            </div>
+            <hr />
+            <div class="modal-body">
+                <div class="text-center">
+                    <h4>Are you sure? You want to delete this device?</h4>
+                </div>
+                <div class="text-center deleteName"><span id="ToDeleteLampName"></span></div>
+                <div id="loaderDiv" style="display:none">
+                    <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                </div>
+            </div>
+            <hr />
+            <div class="row text-center">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-danger" onclick="DeleteLampApi()" id="deleteLamp">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="tvModalDelete">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title text-center">Delete Device</h3>
+            </div>
+            <hr />
+            <div class="mdoal-body">
+                <div class="text-center">
+                    <h4>Are you sure? You want to delete this device? </h4>
+                </div>
+                <div class="text-center deleteName"><span id="ToDeleteTVName"></span></div>
+                <div id="loaderDiv" style="display:none">
+                    <img src="~/Content/ajax-loader.gif" class="loader-div" />
+                </div>
+            </div>
+            <hr />
+            <div class="row text-center">
+                <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                <a href="#" class="btn btn-danger" onclick="DeleteTVApi()" id="deleteTV">Delete</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/app/lamp-funcs.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $("#ConfigLamp").css('display', 'none');
+
+            $("#getLampsApiBtn").click(function (event) {
+                event.preventDefault();
+                $("#addTvForm").css('display', 'none')
+                $("#addLampForm").css('display', 'block')
+                $("#addLampApi").click(function (event) {
+                    event.preventDefault();
+                    AddLampApi();
+                });
+                GetAllLamps();
+            });
+
+            $("#getTvsApiBtn").click(function (event) {
+                event.preventDefault(); addTvApi
+                $("#addLampForm").css('display', 'none')
+                $("#addTvForm").css('display', 'block')
+                $("#addTvApi").click(function (event) {
+                    event.preventDefault();
+                    AddTvApi();
+                });
+                GetAllTvs();
+            });
+
+        });
+
+        function AddLampApi() {
+            var Name = $("#addNameLamp").val();
+            var Consumption = $("#addConsumptionLamp").val();
+            var Type = {
+                Id: 1,
+                Name: "Lamp"
+            }
+            var lamp = {
+                Name: Name,
+                Consumption: Consumption
+            }
+
+            $.ajax({
+                url: '/api/LampApi',
+                type: 'POST',
+                data: JSON.stringify(lamp),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetAllLamps();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+
+            });
+        }
+        function GetAllLamps() {
+
+            //$("#createBlock").css('display', 'block');
+            //$("#editBlock").css('display', 'none');
+            $.ajax({
+                url: '/api/LampApi',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteLampsResponse(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        function WriteLampsResponse(lamps) {
+            var strResult = "";
+            $("#devicesBlock").html("");
+            $.each(lamps, function (index, lamp) {
+                if (lamp.TurnOn === true) {
+
+                    strResult += " <div class='col-md-3 text-center device-block' id='lamp_" + lamp.Id + "'>" +
+
+                        "<div class='inner-item-div device-on'><div class='name-div'> " +
+                        "<h4>" + lamp.Name + "</h4 >" +
+
+                        "<div class='line'></div>" +
+                        "<a href='#' class='btn btn-danger' onclick='ConfirmDeleteLampApi(" + lamp.Id + ",`"+lamp.Name+"`"+")' > Delete</a> </div>" +
+
+                        "<div class='device-info-block'><span class='glyphicon glyphicon-off'></span> <span>Device is - ON</span></div>" +
+                        "<div class='line'></div>" +
+
+                        "<div class='device-info-block'><span class='glyphicon glyphicon-certificate'></span>   <span>Intensity - </span><span>" + lamp.Intensity + "</span > </div >" +
+
+                        "<div class='line'></div>" +
+
+                        "<div class='device-info-block'><span class='glyphicon glyphicon-flash'></span> <span>Consumption - </span><span>" + lamp.Consumption + "wT" + "</span></div>" +
+
+                        "<div class='line'></div>" +
+
+                        "<a class='btn btn-default confBtn' href='#' onclick='ConfigLampApi(" + lamp.Id + ")'><span class='glyphicon glyphicon-cog'></span></a></div></div>"
+                }
+                else {
+                    strResult += " <div class='col-md-3 text-center device-block' id='lamp_" + lamp.Id + "'>" +
+                        "<div class='inner-item-div device-off'><div class='name-div'> " +
+                        "<h4>" + lamp.Name + "</h4 >" +
+
+                        "<div class='line'></div>" +
+                        "<a href='#' class='btn btn-danger' onclick='ConfirmDeleteLampApi(" + lamp.Id + ",`" + lamp.Name + "`" +")'>Delete</a> </div>" +
+
+                        "<div class='device-info-block'><span class='glyphicon glyphicon-off'></span> <span>Device is - OFF</span></div>" +
+                        "<div class='line'></div>" +
+
+                        "<div class='device-info-block'><span class='glyphicon glyphicon-certificate'></span>   <span>Intensity - </span><span>" + lamp.Intensity + "</span > </div >" +
+
+                        "<div class='line'></div>" +
+
+                        " <div class='device-info-block'><span class='glyphicon glyphicon-flash'></span> <span>Consumption - </span><span>" + lamp.Consumption + "wT" + "</span></div>" +
+
+                        "<div class='line'></div>" +
+
+                        "<a class='btn btn-default confBtn' href='#' onclick='ConfigLampApi(" + lamp.Id + ")'><span class='glyphicon glyphicon-cog'></span></a></div></div>"
+                }
+            });
+            $("#devicesBlock").html(strResult);
+
+        }
+        var ConfirmDeleteLampApi = function (Lampid, name) {
+            $("#hiddenId").val(Lampid);
+            $("#ToDeleteLampName").html(name);
+            $("#lampModalDelete").modal('show');
+
+        };
+        var DeleteLampApi = function () {
+            var lampId = parseInt($("#hiddenId").val());
+            var urlDelete = '/api/LampApi/' + lampId;
+            $("#loaderDiv").show();
+            $.ajax({
+                url: urlDelete,
+                type: 'DELETE',
+                success: function (response) {
+                    $("#loaderDiv").hide();
+                    $("#lampModalDelete").modal('hide');
+                    $("#lamp_" + lampId).remove();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                    $("#loaderDiv").hide();
+                    $("#lampModalDelete").modal('hide');
+                }
+            });
+
+        }
+        var ConfigLampApi=function(lampId){
+            var id = lampId;
+            var urlLamp = '/api/LampApi/' + lampId;
+
+            $.ajax({
+                url: urlLamp,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#hiddenId").val(lampId);
+                    $("#modalConfig").modal("show");
+                    WriteLampConfig(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        }
+        var WriteLampConfig = function (lamp) {
+            $("#ConfigForm").html('');
+            $("#ConfigForm").html(lamp.HTML);
+            $("#btnDoneHolder").remove();
+            $("#btnDoneApiHolder").css('display', 'block');
+            $("#btnLampDoneApi").click(function (event) {
+                event.preventDefault();
+                PutLampConfig(lamp.Lamp.Id, lamp.Lamp.Type.Id, lamp.Lamp.Type.Name);
+            });
+        };
+        var PutLampConfig = function (lampId,typeId,typeName) {
+            var TurnOn = $("#TurnOn").val();
+            var Name = $("#Name").val(); Intensity
+            var Intensity = $("#Intensity").val();
+            var Consumption = $("#Consumption").val();
+            var Type = {
+                Id: typeId,
+                Name: typeName
+            };
+            var lamp = {
+                Id: lampId,
+                TurnOn: TurnOn,
+                Name: Name,
+                Intensity: Intensity,
+                Consumption: Consumption,
+                Type: Type
+            };
+            var url = "/api/LampApi/" + lampId;
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: JSON.stringify(lamp),
+                contentType: "application/json;charset=utf-8",
+                success: function (data, status) {
+                    $('#errors').empty();
+                    $("#loaderDiv").hide();
+                    $("#modalConfig").modal("hide");
+                    $("#ConfigForm").html('');
+                    GetAllLamps();
+                },
+                error: function (jxqr, error, status) {
+                    var response = jQuery.parseJSON(jxqr.responseText);
+                    $('#errors').empty();
+                    $('#errors').append("<h2>" + response['Message'] + "</h2>");
+
+                    if (response['ModelState']['lamp.Name']) {
+
+                        $.each(response['ModelState']['lamp.Name'], function (index, item) {
+                            $('#errors').append("<p>" + item + "</p>");
+                        });
+                    }
+                    if (response['ModelState']['lamp.Consumption']) {
+                        $.each(response['ModelState']['lamp.Consumption'], function (index, item) {
+                            $('#errors').append("<p>" + item + "</p>");
+                        });
+                    }
+
+
+                }
+            });
+        }
+
+
+        function AddTvApi() {
+            var Name = $("#addNameTv").val();
+            var Consumption = $("#addConsumptionTv").val();
+       
+            var tv = {
+                Name: Name,
+                Consumption: Consumption
+            }
+
+            $.ajax({
+                url: '/api/TVsApi',
+                type: 'POST',
+                data: JSON.stringify(tv),
+                contentType: "application/json;charset=utf-8",
+                success: function (data) {
+                    GetAllTvs();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+
+            });
+        }
+
+        var GetAllTvs = function () {
+            $.ajax({
+                url: '/api/TVsApi',
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    WriteTvsResponse(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        };
+        var WriteTvsResponse = function (Tvs) {
+            var strResult = "";
+            $("#devicesBlock").html("");
+            $.each(Tvs, function (index, tv) {
+                var str = "<div class='col-md-3 text-center device-block' id='tv_" + tv.TV.Id+"'></div>";
+                $("#devicesBlock").append(str);
+                var block = $("#tv_" + tv.TV.Id);
+                block.html(tv.HTML);
+            })
+        }
+        var ConfirmDeleteTV = function (tvid, name) {
+            $("#hiddenId").val(tvid);
+            $("#ToDeleteTVName").html(name);
+            $("#tvModalDelete").modal('show');
+        };
+        var DeleteTVApi = function () {
+            var tvId = parseInt($("#hiddenId").val());
+            var urlDelete = '/api/TVsApi/' + tvId;
+            $("#loaderDiv").show();
+            $.ajax({
+                url: urlDelete,
+                type: 'DELETE',
+                success: function (response) {
+                    $("#loaderDiv").hide();
+                    $("#tvModalDelete").modal('hide');
+                    $("#tv_" + tvId).remove();
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                    $("#loaderDiv").hide();
+                    $("#lampModalDelete").modal('hide');
+                }
+            });
+        }
+        function ConfigTV (tvId) {
+            var id = tvId;
+            var urlTv = '/api/TVsApi/' + id;
+            $.ajax({
+                url: urlTv,
+                type: 'GET',
+                dataType: 'json',
+                success: function (data) {
+                    $("#hiddenId").val(id);
+                    $("#modalConfig").modal("show");
+                    WriteTvConfig(data);
+                },
+                error: function (x, y, z) {
+                    alert(x + '\n' + y + '\n' + z);
+                }
+            });
+        };
+        var WriteTvConfig = function (tv)
+        {
+            $("#ConfigForm").html('');
+            $("#ConfigForm").html(tv.HTML);
+            $("#btnDoneHolder").remove();
+            $("#btnDoneApiHolder").css('display', 'block');
+            $("#btnTvDoneApi").click(function (event) {
+                event.preventDefault();
+                debugger;
+                PutTvConfig(tv.TV.Id, tv.TV.Type.Id, tv.TV.Type.Name);
+            });
+        };
+        var PutTvConfig = function (tvId, typeId, typeName) {
+            debugger;
+            var TurnOn = $("#tvTurnOn").val();
+            var Name = $("#Name").val(); 
+            var Volume = $("#Volume").val();
+            var Consumption = $("#Consumption").val();
+            var CurrentChannelId = $("#CurrentChannel_ChannelId").val();
+            var CurrentChannelName = $("#CurrentChannel_ChannelId option:selected").html();
+
+            var Type = {
+                Id: typeId,
+                Name: typeName
+            };
+
+            var CurrentChannel = {
+                ChannelId: CurrentChannelId,
+                ChannelName: CurrentChannelName
+            };
+
+            var tv = {
+                Id: tvId,
+                TurnOn: TurnOn,
+                Name: Name,
+                Volume: Volume,
+                Consumption: Consumption,
+                CurrentChannel,
+                Type: Type
+            };
+            var url = "/api/TVsApi/" + tvId;
+            $.ajax({
+                url: url,
+                type: 'PUT',
+                data: JSON.stringify(tv),
+                contentType: "application/json;charset=utf-8",
+                success: function (data, status) {
+                    $('#errors').empty();
+                    $("#loaderDiv").hide();
+                    $("#modalConfig").modal("hide");
+                    $("#ConfigForm").html('');
+                    GetAllTvs();
+                },
+                error: function (jxqr, error, status) {
+                    var response = jQuery.parseJSON(jxqr.responseText);
+                    $('#errors').empty();
+                    $('#errors').append("<h2>" + response['Message'] + "</h2>");
+
+                    if (response['ModelState']['tv.Name']) {
+
+                        $.each(response['ModelState']['tv.Name'], function (index, item) {
+                            $('#errors').append("<p>" + item + "</p>");
+                        });
+                    }
+                    if (response['ModelState']['tv.Consumption']) {
+                        $.each(response['ModelState']['tv.Consumption'], function (index, item) {
+                            $('#errors').append("<p>" + item + "</p>");
+                        });
+                    }
+
+
+                }
+            });
+        }
+        function TVSwitchClick() {
+            var turnOn = $("#TurnOn").val();
+            if ($("#tvTurnOn").val() === "True") {
+                $("#btnSwitchTV").removeClass("btn-success");
+                $("#btnSwitchTV").addClass("btn-warning");
+                $("#tvTurnOn").val("False");
+                $("#tvTurnOn").data().val = false;
+                $("#switchTextTV").html("Device is OFF");
+            }
+            else {
+                $("#btnSwitchTV").removeClass("btn-warning");
+                $("#btnSwitchTV").addClass("btn-success");
+                $("#tvTurnOn").val("True");
+                $("#tvTurnOn").data().val = true;
+                $("#switchTextTV").html("Device is ON");
+            }
+        }
+
+    </script>
+}

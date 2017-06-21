@@ -6,6 +6,7 @@ using SmartHomeMVC.Models.ViewModels.IndexViewModels;
 using SmartHomeMVC.Utilities.ModelToViewConverters;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -83,15 +84,16 @@ namespace SmartHomeMVC.Controllers
                         break;
                 }
             }
-            lamps = dataService.Lamps.GetList();
-            heaters = dataService.Heaters.GetList();
-            tvs = dataService.TVs.GetList();
-            deviceTypes = dataService.DeviceTypes.GetList();
+            //lamps = dataService.Lamps.GetList();
+            //heaters = dataService.Heaters.GetList();
+            //tvs = dataService.TVs.GetList();
+            //deviceTypes = dataService.DeviceTypes.GetList();
 
-            indexViewModel = mapperModelToIndexView.GetIndexViewModel(lamps, heaters, tvs, deviceTypes);
+            //indexViewModel = mapperModelToIndexView.GetIndexViewModel(lamps, heaters, tvs, deviceTypes);
 
-            indexViewModel.Device = device;
-            return View(indexViewModel);
+            //indexViewModel.Device = device;
+            //ModelState.Clear();
+            return RedirectToAction("Index");
         }
 
         #region Lamp Controller
@@ -237,8 +239,7 @@ namespace SmartHomeMVC.Controllers
         [HttpPost]
         public ActionResult ConfigTV(TVIndexViewModel tvViewModel)
         {
-   
-            TV tv = dataService.TVs.Get(tvViewModel.Id);
+               TV tv = dataService.TVs.Get(tvViewModel.Id);
 
             tv.Name = tvViewModel.Name;
             tv.CurrentChannel = dataService.Channels.Get(tvViewModel.CurrentChannel.ChannelId); 
@@ -253,7 +254,17 @@ namespace SmartHomeMVC.Controllers
 
             return PartialView("_TVIndexPartialView", tvViewModel);
         }
-#endregion
+        #endregion
+
+
+        //Go WebApi
+
+        public ActionResult GoWebApi()
+        {
+            return View();
+        }
+
+      
 
     }
 }

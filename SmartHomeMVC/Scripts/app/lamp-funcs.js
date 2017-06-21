@@ -53,32 +53,4 @@ var SwitchClick = function () {
     }
 }
 
-//var ClickDoneConfig = function () {
-//    $("#loaderDiv").show();
 
-//    var formData = $("#lampConfigForm").serialize();
-//    var Id = $("#Id").val();
-//    var Consumption = $("#Consumption").val();
-//    var Intensity = $("#Intensity").val();
-//    var Name = $("#Name").val();
-//    var TurnOn = $("#TurnOn").val();
-//    var data = {
-//        Id: Id,
-//        Consumption: Consumption,
-//        Intensity: Intensity,
-//        Name: Name,
-//        TurnOn: TurnOn
-//    };
-//    debugger
-//    $.ajax({
-//        type: "POST",
-//        url: "/Home/ConfigLamp",
-//        data: data,
-//        success: function () {
-           
-//            $("#loaderDiv").hide();
-//            $("#lampModalConfig").modal("hide");
-//            $("#lamp_Id").html("");
-//        }
-//    })
-//}

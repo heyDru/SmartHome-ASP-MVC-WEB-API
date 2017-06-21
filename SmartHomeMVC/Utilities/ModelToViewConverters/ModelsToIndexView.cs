@@ -75,6 +75,19 @@ namespace SmartHomeMVC.Utilities.ModelToViewConverters
             return channelsViewModel;
         }
 
+        public  List<LampIndexViewModel> GetLampsViewModelsList(ICollection<Lamp> lamps)
+        {
+            var lampsViewModel = Mapper.Map<IEnumerable<Lamp>, List<LampIndexViewModel>>(lamps);
+
+            return lampsViewModel;
+        }
+
+        public List<TVIndexViewModel> GetTVsViewModelsList(ICollection<TV> tvs)
+        {
+            var tvsViewModel = Mapper.Map<IEnumerable<TV>, List<TVIndexViewModel>>(tvs);
+
+            return tvsViewModel;
+        }
 
     }
 }

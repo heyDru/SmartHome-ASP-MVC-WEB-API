@@ -1,0 +1,22 @@
+﻿@model SmartHomeMVC.Models.ViewModels.IndexViewModels.IndexViewModel
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post, new { @id = "addDeviceForm" }))
+{
+    @Html.DropDownListFor(model => model.Device.TypeId,
+            new SelectList(Model.DeviceTypes, "Id", "Name"),
+            "Device Type",
+            new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.Device.TypeId, "", new { @class = "error" })
+
+
+    @Html.TextBoxFor(model => model.Device.Name,
+                new { @class = "form-control", @placeholder = "Device Name" })
+    @Html.ValidationMessageFor(model => model.Device.Name, "", new { @class = "error" })
+
+
+    @Html.TextBoxFor(model => model.Device.Consumption,
+            new { @class = "form-control", @placeholder = "Electricity consumption " })
+    @Html.ValidationMessageFor(model => model.Device.Consumption, "", new { @class = "error" })
+
+    <button type="submit" class="btn btn-block btn-primary inputModal" id="btnSubmit">Create</button>
+}

@@ -95,8 +95,11 @@
     </div>
 
     @Html.HiddenFor(m => m.TurnOn, new { @class = "form-control" })
-    <div class="text-center">
+    <div class="text-center" id="btnDoneHolder">
       <button type="submit" class="btn btn-success btnDone" id="btnDone" ><span class="glyphicon glyphicon-ok btnDoneIcon"></span></button>
+    </div>
+    <div class="text-center" id="btnDoneApiHolder" style="display:none">
+        <a  class="btn btn-success btnDone" id="btnLampDoneApi" ><span class="glyphicon glyphicon-ok btnDoneIcon"></span></a>
     </div>
 }
 
@@ -112,7 +115,6 @@
 
         function OnSuccessConf() {
             $("#loaderDiv").hide();
-            debugger;
             $("#lampModalConfig").modal("hide");
         }
 </script>

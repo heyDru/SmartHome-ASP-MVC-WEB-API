@@ -32,12 +32,12 @@ namespace DataService.Repository
 
         public Lamp Get(int id)
         {
-            return db.Lamps.Find(id);
+            return db.Lamps.Include(l => l.Type).FirstOrDefault(l=>l.Id == id);
         }
 
         public ICollection<Lamp> GetList()
         {
-            return db.Lamps.ToList();
+            return db.Lamps.Include(l=>l.Type).ToList();
         }
 
         public void Switch()
