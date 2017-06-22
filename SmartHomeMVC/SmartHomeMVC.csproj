@@ -326,7 +326,6 @@
     <Content Include="Views\Shared\_TVIndexPartialView.cshtml" />
     <Content Include="Scripts\jquery.validate.unobtrusive.bootstrap.min.js.map" />
     <Content Include="Views\Shared\_LampConfigPartialView.cshtml" />
-    <Content Include="Views\Shared\iii.cshtml" />
     <Content Include="Views\Shared\_HeaterConfigPartialView.cshtml" />
     <Content Include="Views\Shared\_TVConfigPartialView.cshtml" />
     <Content Include="Views\Info\Contact.cshtml" />

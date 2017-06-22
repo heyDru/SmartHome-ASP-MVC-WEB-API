@@ -13,13 +13,11 @@
     </div>
     <div class="row jumbotron text-center">
         <div class="col-md-4"><button class="btn" id="getLampsApiBtn">Light</button></div>
-        <div class="col-md-4"><button class="btn" id="getHeatersApiBtn">Temperature</button></div>
         <div class="col-md-4"><button class="btn" id="getTvsApiBtn">TV</button></div>
     </div>
 
     <div class="col-lg-12 text-center " id="addLampForm" style="display:none">
-        @*<label>Lamp Name: </label><input type="text" id="addNameLamp"/>
-        <label>Lamp Consumption: </label><input type="number" id="addConsumptionLamp" />*@
+      
         <form class="form-inline">
             <div class="form-group">
                 <label class="sr-only" for="addNameLamp">Lamp Name:</label>
@@ -458,12 +456,10 @@
             $("#btnDoneApiHolder").css('display', 'block');
             $("#btnTvDoneApi").click(function (event) {
                 event.preventDefault();
-                debugger;
                 PutTvConfig(tv.TV.Id, tv.TV.Type.Id, tv.TV.Type.Name);
             });
         };
         var PutTvConfig = function (tvId, typeId, typeName) {
-            debugger;
             var TurnOn = $("#tvTurnOn").val();
             var Name = $("#Name").val(); 
             var Volume = $("#Volume").val();
